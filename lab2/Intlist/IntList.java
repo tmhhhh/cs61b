@@ -92,7 +92,7 @@ public class IntList {
         }
         P.rest = B;
 
-        return P;
+        return A;
     }
 
     /**
@@ -102,7 +102,7 @@ public class IntList {
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
         if(A == null)
-            if(A == null)
+            if(B == null)
                 return null;
             else
                 return new IntList(B.first, B.rest);
