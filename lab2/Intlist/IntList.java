@@ -96,6 +96,17 @@ public class IntList {
     }
 
     /**
+     * dcatenate - recursive version
+     */
+    public static IntList dcatenate_re(IntList A, IntList B) {
+        if (A == null) { /* Base case */
+            return B;
+        }
+        A.rest = dcatenate_re(A.rest, B);
+        return A;
+    }
+
+    /**
      * Returns a list consisting of the elements of A followed by the
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
@@ -135,6 +146,23 @@ public class IntList {
 
         return L;
     }
+
+    /**
+     * catenate - recursive (destructive)
+     */
+    public static IntList catenate_re(IntList A, IntList B) {
+        if (A == null) {
+            /* Enter B mode! later A should be null always */
+            if (B == null) {
+                return null;
+            }
+            return new IntList(B.first, catenate_re(null, B.rest));
+        } else { /* A != null */
+            /* Enter A mode! later B stays the same */
+            return new IntList(A.first, catenate_re(A.rest, B));
+        }
+    }
+
 
 
 
