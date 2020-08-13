@@ -41,6 +41,8 @@ public class NBody {
         StdDraw.picture(0, 0, imageToDraw);
         StdDraw.show();
 
+        StdDraw.enableDoubleBuffering();
+
         for (Planet p : planets) {
             p.draw();
         }
