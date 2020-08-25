@@ -76,11 +76,11 @@ public class LinkedListDeque<T> {
         tail.front = last.front;
         last.front.next = tail;
         size--;
-        return tail.item;
+        return last.item;
     }
 
     public T get(int index) {
-        if (index >= size ) {
+        if (index >= size) {
             return null;
         }
         int i = 0;
@@ -94,7 +94,7 @@ public class LinkedListDeque<T> {
     }
 
     public T getRecursive(int index) {
-        if (index >= size ) {
+        if (index >= size) {
             return null;
         }
         return getRecursiveHelp(index, 0, head.next);
