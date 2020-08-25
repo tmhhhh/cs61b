@@ -15,17 +15,18 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (size == items.length) {
-            resize(size + 1, 0, 1);
+            resize(size * 3, 0, 1);
         } else {
             resize(items.length, 0, 1);
         }
+
         size += 1;
         items[0] = item;
     }
 
     public void addLast(T item) {
         if (size == items.length) {
-            resize(size + 1, 0, 0);
+            resize(size * 3, 0, 0);
         }
         items[size] = item;
         size += 1;
@@ -50,7 +51,7 @@ public class ArrayDeque<T> {
         }
         T res = items[0];
         size--;
-        resize(size, 1, 0);
+        resize(items.length, 1, 0);
         return res;
     }
 
