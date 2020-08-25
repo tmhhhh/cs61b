@@ -43,7 +43,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (size == 0) {return null;}
+        if (size == 0) {
+            return null;
+        }
         T res = items[0];
         resize(size - 1, 1);
         size--;
@@ -51,7 +53,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (size == 0) {return null;}
+        if (size == 0) {
+            return null;
+        }
         T res = items[size - 1];
         resize(size - 1, 0);
         size--;

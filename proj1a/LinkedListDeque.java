@@ -58,7 +58,9 @@ public class LinkedListDeque<T> {
     }
 
     public T removeFirst() {
-        if (size == 0) {return null;}
+        if (size == 0) {
+            return null;
+        }
         Node first = head.next;
         head.next = first.next;
         first.next.front = head;
@@ -67,7 +69,9 @@ public class LinkedListDeque<T> {
     }
 
     public T removeLast() {
-        if (size == 0) {return null;}
+        if (size == 0) {
+            return null;
+        }
         Node last = tail.front;
         tail.front = last.front;
         last.front.next = tail;
@@ -76,28 +80,30 @@ public class LinkedListDeque<T> {
     }
 
     public T get(int index) {
+        if (index >= size ) {
+            return null;
+        }
         int i = 0;
         Node tmp = head.next;
-        while (i < index && i < size) {
+        while (i < index) {
             i++;
             tmp = tmp.next;
         }
 
-        if(i == size) {
-            return null;
-        }
-        else {
-            return tmp.item;
-        }
+        return tmp.item;
     }
 
     public T getRecursive(int index) {
+        if (index >= size ) {
+            return null;
+        }
         return getRecursiveHelp(index, 0, head.next);
     }
 
     private T getRecursiveHelp(int index, int i, Node tmp) {
-        if (i == index) {return tmp.item;}
-        if (i == size) {return null;}
+        if (i == index) {
+            return tmp.item;
+        }
         return getRecursiveHelp(index, i + 1, tmp.next);
     }
     
