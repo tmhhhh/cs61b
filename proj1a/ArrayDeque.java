@@ -14,7 +14,7 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize(size + 1, 1);
         }
         size += 1;
@@ -22,7 +22,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize(size + 1, 0);
         }
         items[size] = item;
@@ -37,12 +37,13 @@ public class ArrayDeque<T> {
         return size;
     }
     public void printDeque() {
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.print(items[i] + " ");
         }
     }
 
     public T removeFirst() {
+        if (size == 0) {return null;}
         T res = items[0];
         resize(size - 1, 1);
         size--;
@@ -50,6 +51,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {return null;}
         T res = items[size - 1];
         resize(size - 1, 0);
         size--;

@@ -18,7 +18,7 @@ public class LinkedListDeque<T> {
 
     public LinkedListDeque() {
         head = new Node(null, null, null);
-        tail = new Node( null, null, null);
+        tail = new Node(null, null, null);
         head.front = tail;
         head.next = tail;
         tail.next = head;
@@ -26,16 +26,6 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-//    public LinkedListDeque(T x) {
-//        head = new Node(-1, null, null);
-//        tail = new Node(-1, null, null);
-//        Node first = new Node(x, tail, head);
-//        head.next = first;
-//        tail.front = first;
-//        head.front = tail;
-//        tail.next = head;
-//        size = 0;
-//    }
 
     public void addFirst(T item) {
         Node first = new Node(item, head.next, head);
@@ -61,13 +51,14 @@ public class LinkedListDeque<T> {
 
     public void printDeque() {
         Node tmp = head.next;
-        while(tmp != tail) {
+        while (tmp != tail) {
             System.out.print(tmp.item + " ");
             tmp = tmp.next;
         }
     }
 
     public T removeFirst() {
+        if (size == 0) {return null;}
         Node first = head.next;
         head.next = first.next;
         first.next.front = head;
@@ -76,6 +67,7 @@ public class LinkedListDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {return null;}
         Node last = tail.front;
         tail.front = last.front;
         last.front.next = tail;
@@ -86,7 +78,7 @@ public class LinkedListDeque<T> {
     public T get(int index) {
         int i = 0;
         Node tmp = head.next;
-        while(i < index && i < size) {
+        while (i < index && i < size) {
             i++;
             tmp = tmp.next;
         }
@@ -103,9 +95,9 @@ public class LinkedListDeque<T> {
         return getRecursiveHelp(index, 0, head.next);
     }
 
-    public T getRecursiveHelp(int index, int i, Node tmp) {
-        if(i == index) return tmp.item;
-        if (i == size) return null;
+    private T getRecursiveHelp(int index, int i, Node tmp) {
+        if (i == index) {return tmp.item;}
+        if (i == size) {return null;}
         return getRecursiveHelp(index, i + 1, tmp.next);
     }
     
