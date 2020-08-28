@@ -13,7 +13,7 @@ public class ArrayDeque<T> {
         items = (T[]) new Object[initSize];
         size = 0;
         nextFirst = items.length / 2 - 1;
-        nextLast = items.length / 2 ;
+        nextLast = items.length / 2;
     }
 
     private void resize(int capacity) {
@@ -84,6 +84,7 @@ public class ArrayDeque<T> {
         }
         nextFirst = (nextFirst + 1) % items.length;
         T first = items[nextFirst];
+        items[nextFirst] = null;
         size--;
 
         return first;
@@ -96,8 +97,9 @@ public class ArrayDeque<T> {
         if ((double) size / items.length < 0.25 && items.length > initSize) {
             resizeDown();
         }
-        nextLast = ((nextLast - 1) + items.length) / items.length;
+        nextLast = ((nextLast - 1) + items.length) % items.length;
         T last = items[nextLast];
+        items[nextLast] = null;
         size--;
 
         return last;
