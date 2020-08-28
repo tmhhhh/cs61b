@@ -1,5 +1,5 @@
 /**
- * Created by JunhaoW on 04/03/2019
+ * reference: Junhao
  */
 public class ArrayDeque<T> {
     private int size;
