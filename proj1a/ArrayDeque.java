@@ -7,13 +7,14 @@ public class ArrayDeque<T> {
     private int nextLast;
     private T[] items;
 
-    private int initSize = 4;
+    private int initSize = 8;
 
     public ArrayDeque() {
         items = (T[]) new Object[initSize];
         size = 0;
-        nextFirst = items.length / 2 - 1;
-        nextLast = items.length / 2;
+        int mid = items.length / 2;
+        nextFirst = mid - 1;
+        nextLast = mid;
     }
 
     private void resize(int capacity) {
@@ -42,10 +43,10 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             resize(items.length * 2);
         }
-        size++;
         items[nextFirst] = item;
         /* since in java, -5 % 6 == -5, we need to add items.length */
         nextFirst = ((nextFirst - 1) + items.length) % items.length;
+        size++;
     }
 
     public void addLast(T item) {
@@ -53,7 +54,7 @@ public class ArrayDeque<T> {
             resize(items.length * 2);
         }
         items[nextLast] = item;
-        nextLast = (nextFirst + 1) % items.length;
+        nextLast = (nextLast + 1) % items.length;
         size++;
     }
 
@@ -68,20 +69,25 @@ public class ArrayDeque<T> {
     public void printDeque() {
         int cnt = 0;
         int start = nextFirst + 1;
+        String str = "";
         while (cnt < size) {
-            System.out.print(items[start % items.length] + " ");
+            T ch = items[start % items.length];
+            str += cnt == size - 1 ? ch : (ch + " ");
             cnt++;
             start++;
         }
+
+        System.out.println(str);
     }
 
     public T removeFirst() {
-        if (size == 0) {
+        if (isEmpty()) {
             return null;
         }
         if ((double) size / items.length < 0.25 && items.length > initSize) {
             resizeDown();
         }
+
         nextFirst = (nextFirst + 1) % items.length;
         T first = items[nextFirst];
         items[nextFirst] = null;
@@ -91,7 +97,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (size == 0) {
+        if (isEmpty()) {
             return null;
         }
         if ((double) size / items.length < 0.25 && items.length > initSize) {
@@ -110,7 +116,10 @@ public class ArrayDeque<T> {
             return null;
         }
         int start = nextFirst + 1;
-        start += index;
+        while(index > 0) {
+            start++;
+            index--;
+        }
 
         return items[start % items.length];
     }
