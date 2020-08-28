@@ -7,13 +7,13 @@ public class ArrayDeque<T> {
     private int nextLast;
     private T[] items;
 
-    private int initSize = 8;
+    private int initSize = 4;
 
     public ArrayDeque() {
         items = (T[]) new Object[initSize];
         size = 0;
-        nextFirst = items.length - 1;
-        nextLast = items.length;
+        nextFirst = items.length / 2 - 1;
+        nextLast = items.length / 2 ;
     }
 
     private void resize(int capacity) {
@@ -52,9 +52,9 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             resize(items.length * 2);
         }
-        size++;
         items[nextLast] = item;
         nextLast = (nextFirst + 1) % items.length;
+        size++;
     }
 
     public boolean isEmpty() {
@@ -82,10 +82,9 @@ public class ArrayDeque<T> {
         if ((double) size / items.length < 0.25 && items.length > initSize) {
             resizeDown();
         }
-        T first = items[(nextFirst + 1) % items.length];
-        nextFirst++;
+        nextFirst = (nextFirst + 1) % items.length;
+        T first = items[nextFirst];
         size--;
-        resizeDown();
 
         return first;
     }
@@ -97,10 +96,9 @@ public class ArrayDeque<T> {
         if ((double) size / items.length < 0.25 && items.length > initSize) {
             resizeDown();
         }
-        T last = items[((nextLast - 1) + items.length) / items.length];
-        nextLast--;
+        nextLast = ((nextLast - 1) + items.length) / items.length;
+        T last = items[nextLast];
         size--;
-        resizeDown();
 
         return last;
     }
@@ -113,5 +111,12 @@ public class ArrayDeque<T> {
         start += index;
 
         return items[start % items.length];
+    }
+
+    public T getItem(int index) {
+        return items[index];
+    }
+    public int getLength() {
+        return items.length;
     }
 }
