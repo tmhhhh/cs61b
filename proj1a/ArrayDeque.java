@@ -116,18 +116,12 @@ public class ArrayDeque<T> {
             return null;
         }
         int start = nextFirst + 1;
-        while(index > 0) {
+        while (index > 0) {
             start++;
             index--;
         }
 
         return items[start % items.length];
     }
-
-    public T getItem(int index) {
-        return items[index];
-    }
-    public int getLength() {
-        return items.length;
-    }
 }
+
